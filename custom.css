@@ -1,0 +1,176 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.site-content {
+  flex: 1;
+}
+
+.logo {
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+}
+
+.navbar {
+  padding: 0.5rem 0rem;
+  border-bottom: 1px solid grey;
+  margin-bottom: 1rem;
+}
+
+.navbar-nav a.nav-link:last-of-type {
+  padding-right: 0;
+}
+
+.masthead {
+  width: 100%;
+  min-height: 60vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.black-overlay {
+  display: -webkit-flex;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.2);
+  height: 100vh;
+  align-items: center;
+  text-align: center;
+  display: block;
+  position: absolute;
+  width: 100%;
+}
+
+.content-box {
+  max-width: 750px;
+  margin: 0px auto;
+  color: white;
+}
+
+h1 {
+  font-family: "Fira Code", monospace;
+  font-weight: 400;
+}
+
+.singleCol {
+  max-width: 750px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.potrait-image {
+  float: left;
+  max-width: 200px;
+  margin: 5px 15px 15px 0px;
+}
+
+.btn-toolbar {
+  margin: auto;
+  display: table;
+}
+
+#drag-container {
+  position: relative;
+  box-sizing: border-box;
+  background-color: black;
+  min-height: 60vh;
+  overflow: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 60%;
+  padding: 8px;
+}
+
+.trash {
+  position: absolute;
+  background-color: red;
+  bottom: 0;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trash i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+}
+
+.drag-handle > .fa-folder {
+  display: flex;
+  color: #f4d079;
+  cursor: grab;
+}
+
+.drag-handle > .fa-file {
+  display: flex;
+  color: #f0eee5;
+  cursor: grab;
+}
+
+.folder,
+.file {
+  display: flex;
+  flex: 1 1 50%;
+  max-width: 50%;
+  flex-direction: column;
+}
+
+.folder input.folder-name,
+.file input.file-name {
+  background-color: transparent;
+  font-family: monospace;
+  color: white;
+  border: none;
+  outline: none;
+  font-size: 85%;
+  padding: 5px;
+}
+
+.content {
+  display: flex;
+  flex: 0 0 50%;
+  align-items: center;
+}
+
+.children {
+  display: flex;
+  flex: 0 0 50%;
+  flex-direction: column;
+}
+
+.nesting-bars {
+  display: flex;
+  color: white;
+}
+
+.depth {
+  display: flex;
+}
+
+footer {
+  width: 100%;
+  background-color: lightslategrey;
+  padding: 1rem 0rem;
+  padding-bottom: 1rem;
+  color: white;
+}
+
+footer a {
+  color: lightgray;
+}
+
+footer a:hover {
+  color: white;
+  text-decoration: underline;
+}

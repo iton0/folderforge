@@ -1,0 +1,13 @@
+.eslintrc.js
+.eslintrc.cjs
+.eslintrc.json
+.eslintcache
+node_modules/
+*.log
+*.debug
+.env
+dist/
+build/
+package-lock.json
+package.json
+yarn.lock
