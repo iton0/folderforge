@@ -60,6 +60,31 @@ document.addEventListener("DOMContentLoaded", () => {
         nameInput.value.length,
         nameInput.value.length,
       );
+      const siblings = Array.from(
+        nameInput.parentElement.parentElement.parentElement.children,
+      ).filter((child) => {
+        return (
+          child !== nameInput.parentElement.parentElement &&
+          child.querySelector("input") &&
+          child.querySelector("input") !== nameInput
+        );
+      });
+
+      const currentName = nameInput.value;
+
+      const hasDuplicateSibling = siblings.some((sibling) => {
+        const siblingInput = sibling.querySelector("input");
+        return (
+          siblingInput.value !== `new_${type}` &&
+          siblingInput.value === currentName
+        );
+      });
+
+      if (hasDuplicateSibling) {
+        alert(`A ${type} with the same name already exists`);
+        nameInput.name = `new_${type}`;
+        nameInput.value = nameInput.name;
+      }
     });
 
     const nestItems = createElementWithClassAndAttribute("div", "children");
@@ -170,10 +195,11 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
 
       const dropTarget = e.currentTarget.querySelector(".children");
-      console.log("droptarget ", dropTarget);
-      console.log("droptarget parent", dropTarget.parentElement);
       const tempId = e.dataTransfer.getData("text/plain");
       const draggedItem = document.querySelector(`[data-temp-id="${tempId}"]`);
+      const draggedItemName = draggedItem
+        .querySelector("input")
+        .getAttribute("name");
       const dropTargetNestingLevel = parseInt(
         dropTarget.parentElement.dataset.nestingLevel,
       );
@@ -182,9 +208,37 @@ document.addEventListener("DOMContentLoaded", () => {
         !draggedItem.contains(dropTarget) &&
         dropTarget.children !== draggedItem
       ) {
-        updateNestingLevel(dropTargetNestingLevel, draggedItem);
-        createNestingBars(draggedItem);
-        dropTarget.appendChild(draggedItem);
+        const dropTargetChildren = dropTarget.children;
+        const draggedItemType = draggedItem.getAttribute("class");
+
+        const checkForDuplicateName = (children, itemName, itemType) => {
+          for (let i = 0; i < children.length; i++) {
+            const child = children[i];
+            const childName = child.querySelector("input").getAttribute("name");
+
+            if (itemName === childName && itemName !== `new_${itemType}`) {
+              alert(`A ${itemType} with that name already exists`);
+              return true;
+            }
+          }
+          return false;
+        };
+
+        const handleDropAction = (target, nestingLevel, item) => {
+          updateNestingLevel(nestingLevel, item);
+          createNestingBars(item);
+          target.appendChild(item);
+        };
+
+        const isDuplicate = checkForDuplicateName(
+          dropTargetChildren,
+          draggedItemName,
+          draggedItemType,
+        );
+
+        if (!isDuplicate) {
+          handleDropAction(dropTarget, dropTargetNestingLevel, draggedItem);
+        }
       }
     });
 
