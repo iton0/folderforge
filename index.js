@@ -280,19 +280,19 @@ document.addEventListener("DOMContentLoaded", () => {
     trashContainer.addEventListener("dragover", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      e.currentTarget.style.opacity = 1;
+      e.currentTarget.style.opacity = 0.8;
     });
 
     trashContainer.addEventListener("dragleave", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      e.currentTarget.style.opacity = 0.5;
+      e.currentTarget.style.opacity = 0.4;
     });
 
     trashContainer.addEventListener("drop", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      e.currentTarget.style.opacity = 0.5;
+      e.currentTarget.style.opacity = 0.4;
       const dropTarget = document.querySelector(".trash");
       console.log("droptarget ", dropTarget);
       const tempId = e.dataTransfer.getData("text/plain");
