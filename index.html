@@ -25,30 +25,8 @@
   </head>
 
   <body>
-    <header class="container">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="index.html"
-          ><img src="img/FolderForge.svg" class="logo" alt="FolderForge Logo"
-        /></a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div
-          class="collapse navbar-collapse justify-content-end"
-          id="navbarNavAltMarkup"
-        >
-          <div class="navbar-nav">
-            <a class="nav-link" href="about.html">About</a>
-          </div>
-        </div>
-      </nav>
+    <header class="container text-center">
+      <img src="img/FolderForge.svg" class="logo" alt="FolderForge Logo" />
     </header>
 
     <div class="container container-center">
@@ -97,11 +75,9 @@
 
     <footer>
       <div class="container text-center">
-        <p class="small">&copy; <span id="year"></span>, FolderForge</p>
+        <p class="small">&copy; FolderForge <span id="year"></span></p>
       </div>
     </footer>
-    <script src="index.js"></script>
-    <script src="forge.js"></script>
     <script>
       document.getElementById("year").innerHTML = new Date().getFullYear();
     </script>
@@ -110,5 +86,7 @@
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script>
+    <script src="index.js"></script>
+    <script src="forge.js"></script>
   </body>
 </html>
