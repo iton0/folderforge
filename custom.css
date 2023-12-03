@@ -5,59 +5,10 @@ body {
   flex-direction: column;
 }
 
-.site-content {
-  flex: 1;
-}
-
 .logo {
   width: 100%;
   max-width: 250px;
   height: auto;
-}
-
-.masthead {
-  width: 100%;
-  min-height: 60vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin-bottom: 10px;
-  position: relative;
-}
-
-.black-overlay {
-  display: -webkit-flex;
-  display: flex;
-  background-color: rgba(0, 0, 0, 0.2);
-  height: 100vh;
-  align-items: center;
-  text-align: center;
-  display: block;
-  position: absolute;
-  width: 100%;
-}
-
-.content-box {
-  max-width: 750px;
-  margin: 0px auto;
-  color: white;
-}
-
-h1 {
-  font-family: "Fira Code", monospace;
-  font-weight: 400;
-}
-
-.singleCol {
-  max-width: 750px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.potrait-image {
-  float: left;
-  max-width: 200px;
-  margin: 5px 15px 15px 0px;
 }
 
 .btn-toolbar {
@@ -79,7 +30,7 @@ h1 {
 
 .trash {
   position: absolute;
-  background-color: #8b0000;
+  background-color: red;
   bottom: 0;
   right: 0;
   width: 50px;
@@ -150,11 +101,5 @@ h1 {
 }
 
 footer {
-  width: 100%;
   color: #333333;
-}
-
-footer a:hover {
-  color: #333333;
-  text-decoration: underline;
 }
