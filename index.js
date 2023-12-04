@@ -97,7 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
       newContainer.appendChild(nestItems);
     }
     dragContainer.appendChild(newContainer);
-    undoStack.push(newContainer);
 
     // Nesting Logic Functions
     function updateNestingLevel(dropTargetNestingLevel, draggedItem) {
