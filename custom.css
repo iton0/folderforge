@@ -16,6 +16,11 @@ body {
   display: table;
 }
 
+.fa-info-circle {
+  margin-right: 10px;
+  color: inherit;
+}
+
 .card-body {
   width: auto;
   margin-top: 5px;
@@ -120,16 +125,11 @@ footer {
 }
 
 .small a i {
-  margin-left: 5px;
+  margin-right: 3px;
   transition: color 0.3s;
   opacity: 0.7;
 }
 
 .small a:hover i {
   opacity: 1;
-}
-
-.fa-info-circle {
-  margin-right: 10px;
-  color: inherit;
 }
