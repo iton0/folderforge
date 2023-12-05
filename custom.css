@@ -16,6 +16,14 @@ body {
   display: table;
 }
 
+.card-body {
+  width: auto;
+  margin-top: 5px;
+  background-color: grey;
+  color: white;
+  text-align: center;
+}
+
 #drag-container {
   position: relative;
   box-sizing: border-box;
@@ -119,4 +127,9 @@ footer {
 
 .small a:hover i {
   opacity: 1;
+}
+
+.fa-info-circle {
+  margin-right: 10px;
+  color: inherit;
 }

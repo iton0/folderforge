@@ -35,6 +35,15 @@
         role="toolbar"
         aria-label="Toolbar with tree creating functionality"
       >
+        <i
+          class="fas fa-info-circle"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseExample"
+          aria-expanded="false"
+          aria-controls="collapseExample"
+        >
+        </i>
         <div
           class="btn-group me-2"
           role="group"
@@ -62,6 +71,16 @@
           <button type="button" class="btn btn-success" id="forge">
             Forge
           </button>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+              Drag icon of folder/file to drag-n-drop. Click on folder/file name
+              to rename.
+            </div>
+          </div>
         </div>
       </div>
       <div class="container" id="drag-container">
