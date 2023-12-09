@@ -195,8 +195,9 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
 
       const dropTarget = e.currentTarget.querySelector(".children");
-      const tempId = e.dataTransfer.getData("text/plain");
-      const draggedItem = document.querySelector(`[data-temp-id="${tempId}"]`);
+      const draggedItem = document.querySelector(
+        '[data-temp-id="temporary_id"]',
+      );
       const draggedItemName = draggedItem
         .querySelector("input")
         .getAttribute("name");
@@ -244,8 +245,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     newContainer.addEventListener("dragend", (e) => {
       e.stopPropagation();
-      const tempId = e.dataTransfer.getData("text/plain");
-      const draggedItem = document.querySelector(`[data-temp-id="${tempId}"]`);
+      const draggedItem = document.querySelector(
+        '[data-temp-id="temporary_id"]',
+      );
       if (draggedItem) {
         draggedItem.removeAttribute("data-temp-id");
       }
@@ -261,8 +263,9 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       const dropTarget = document.getElementById("drag-container");
       console.log("droptarget ", dropTarget);
-      const tempId = e.dataTransfer.getData("text/plain");
-      const draggedItem = document.querySelector(`[data-temp-id="${tempId}"]`);
+      const draggedItem = document.querySelector(
+        '[data-temp-id="temporary_id"]',
+      );
 
       updateNestingLevel(-1, draggedItem);
       createNestingBars(draggedItem);
@@ -271,8 +274,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     dragContainer.addEventListener("dragend", (e) => {
       e.stopPropagation();
-      const tempId = e.dataTransfer.getData("text/plain");
-      const draggedItem = document.querySelector(`[data-temp-id="${tempId}"]`);
+      const draggedItem = document.querySelector(
+        '[data-temp-id="temporary_id"]',
+      );
       draggedItem.removeAttribute("data-temp-id");
     });
 
@@ -295,8 +299,9 @@ document.addEventListener("DOMContentLoaded", () => {
       e.currentTarget.style.opacity = 0.4;
       const dropTarget = document.querySelector(".trash");
       console.log("droptarget ", dropTarget);
-      const tempId = e.dataTransfer.getData("text/plain");
-      const draggedItem = document.querySelector(`[data-temp-id="${tempId}"]`);
+      const draggedItem = document.querySelector(
+        '[data-temp-id="temporary_id"]',
+      );
       draggedItem.remove();
     });
   }
