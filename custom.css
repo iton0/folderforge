@@ -18,13 +18,17 @@ body {
 
 .fa-info-circle {
   margin-right: 10px;
+  color: grey;
+}
+
+.fa-info-circle:hover {
   color: #f5f5f5;
 }
 
 .card-body {
   width: auto;
   margin-top: 5px;
-  background-color: grey;
+  background-color: inherit;
   color: white;
   text-align: center;
 }
