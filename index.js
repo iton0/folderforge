@@ -44,14 +44,24 @@ document.addEventListener("DOMContentLoaded", () => {
     nameInput.classList.add(`${type}-name`);
     nameInput.value = `new_${type}`;
     nameInput.name = nameInput.value;
+    nameInput.addEventListener("focus", () => {
+      nameInput.style.fontWeight = "bold";
+    });
     nameInput.addEventListener("input", () => {
       newContainer.draggable = false;
       nameInput.name = nameInput.value.trim();
       nameInput.value = nameInput.value.replace(/\s+/g, " ");
     });
+    nameInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === "Escape") {
+        e.preventDefault();
+        nameInput.blur();
+      }
+    });
     nameInput.addEventListener("blur", () => {
       newContainer.draggable = true;
       nameInput.value = nameInput.value.trim();
+      nameInput.style.fontWeight = "normal";
       if (nameInput.name === "") {
         nameInput.name = `new_${type}`;
         nameInput.value = nameInput.name;
