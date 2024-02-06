@@ -38,8 +38,8 @@ body {
   box-sizing: border-box;
   background-color: black;
   border: solid;
-  border-width: 1px;
-  border-color: white;
+  border-width: 2px;
+  border-color: slategray;
   min-height: 75vh;
   overflow: auto;
   margin-top: 10px;
