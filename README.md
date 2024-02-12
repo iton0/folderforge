@@ -14,9 +14,13 @@ generation of ASCII folder structure diagrams and provides the option
 to download a zipped version of the converted diagram as a complete
 custom filesystem.
 
+## Further Development
+
+I am writing code refactorings right now in [this branch](https://github.com/iton0/folderforge/tree/vue), using Tailwind CSS for simplified styling and Vue.js for increased functionality. I want this project finished by early to mid-May. In addition to codebase optimization, this project attempts to improve user experience by utilizing the robust features of Vue.js and Tailwind CSS for a contemporary, responsive design. As I work on producing a more effective and aesthetically pleasing application, keep an eye out for the upcoming upgrades. Additionally if all goes well, I may merge with main branch.
+
 ## Getting Involved
 
-If you're interested in optimizing your workflow or contributing to the project, 
+If you're interested in optimizing your workflow or contributing to the project,
 feel free to explore the repo.
 
 To learn more about me, visit [my GitHub profile](https://github.com/iton0).
