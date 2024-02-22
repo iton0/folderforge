@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const dragContainer = document.getElementById("drag-container");
   const trashContainer = document.querySelector(".trash");
 
+  // Function to create an HTML element with class and attributes
   function createElementWithClassAndAttribute(
     elementType,
     className,
@@ -15,7 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
     return newElement;
   }
 
+  // Function to create a container element
   function createContainer(type) {
+    // Create child elements for the container
     const newContainer = createElementWithClassAndAttribute("span", type, {
       "data-nesting-level": 0,
       draggable: true,
@@ -90,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
       });
 
+      // If sibling with same name exists returns to default name
       if (hasDuplicateSibling) {
         alert(`A ${type} with the same name already exists`);
         nameInput.name = `new_${type}`;
@@ -103,6 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
     containerContent.appendChild(dragHandle);
     containerContent.appendChild(nameInput);
     newContainer.appendChild(containerContent);
+    // Files cannot have elements nested in them
     if (type === "folder") {
       newContainer.appendChild(nestItems);
     }
@@ -180,14 +185,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       }
     }
-
-    // For testing/debugging
-    newContainer.addEventListener("click", (e) => {
-      e.stopPropagation();
-      e.preventDefault();
-      console.log("current target:", e.currentTarget);
-      console.log("nesting level :", e.currentTarget.dataset.nestingLevel);
-    });
 
     // New container event listeners
     newContainer.addEventListener("dragstart", (e) => {
