@@ -13,10 +13,3 @@ programmers working on substantial projects. FolderForge enables the
 generation of ASCII folder structure diagrams and provides the option
 to download a zipped version of the converted diagram as a complete
 custom filesystem.
-
-## Getting Involved
-
-If you're interested in optimizing your workflow or contributing to the project,
-feel free to explore the repo.
-
-To learn more about me, visit [my GitHub profile](https://github.com/iton0).
