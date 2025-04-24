@@ -1,3 +1,5 @@
+<img alt="FolderForge Logo" height="128" src="/assets/FolderForge.svg" />
+
 ## Issue
 
 When planning projects, I often struggled with structuring the file
