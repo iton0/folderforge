@@ -264,12 +264,6 @@ function createContainer(type) {
   });
 }
 
-function addButtonListener(id, type) {
-  document
-    .getElementById(id)
-    .addEventListener("click", () => createContainer(type));
-}
-
 function handleClear() {
   Array.from(dragContainer.children).forEach((child) => {
     if (child !== trashContainer) {
@@ -278,13 +272,17 @@ function handleClear() {
   });
 }
 
-function createFileSystem(zip, parent, basePath = "") {
-  const folderName = parent.querySelector(".folder-name").getAttribute("name");
+function createFileSystem(zip, parentElement, basePath = "") {
+  const folderName = parentElement
+    .querySelector(".folder-name")
+    .getAttribute("name");
   const folderPath = basePath === "" ? folderName : `${basePath}/${folderName}`;
 
   zip.folder(folderPath);
 
-  const children = Array.from(parent.querySelector(".children").children);
+  const children = Array.from(
+    parentElement.querySelector(".children").children,
+  );
   children.forEach((child) => {
     if (child.getAttribute("class") === "file") {
       const fileName = child.querySelector(".file-name").getAttribute("name");
@@ -300,7 +298,6 @@ function createFileSystem(zip, parent, basePath = "") {
 }
 
 function handleForge() {
-  const dragContainer = document.getElementById("drag-container");
   const rootElement = dragContainer.querySelector(".folder");
 
   if (!rootElement) {
@@ -329,13 +326,14 @@ function handleForge() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  addButtonListener("addFolder", "folder");
-  addButtonListener("addFile", "file");
-});
-
 document.addEventListener("click", (e) => {
   switch (e.target.id) {
+    case "addFolder":
+      createContainer("folder");
+      break;
+    case "addFile":
+      createContainer("file");
+      break;
     case "clear":
       handleClear();
       break;
@@ -364,34 +362,31 @@ dragContainer.addEventListener("drop", (e) => {
 
 dragContainer.addEventListener("dragend", (e) => {
   const draggedItem = document.querySelector('[data-temp-id="temporary_id"]');
+  draggedItem.removeAttribute("data-temp-id");
 
   e.stopPropagation();
-
-  draggedItem.removeAttribute("data-temp-id");
 });
 
 // Trash container event listeners
 trashContainer.addEventListener("dragover", (e) => {
+  e.currentTarget.style.opacity = trashHoverOpacity;
+
   e.preventDefault();
   e.stopPropagation();
-
-  e.currentTarget.style.opacity = trashHoverOpacity;
 });
 
 trashContainer.addEventListener("dragleave", (e) => {
+  e.currentTarget.style.opacity = trashDefaultOpacity;
+
   e.preventDefault();
   e.stopPropagation();
-
-  e.currentTarget.style.opacity = trashDefaultOpacity;
 });
 
 trashContainer.addEventListener("drop", (e) => {
   const draggedItem = document.querySelector('[data-temp-id="temporary_id"]');
+  e.currentTarget.style.opacity = trashDefaultOpacity;
 
   e.preventDefault();
   e.stopPropagation();
-
-  e.currentTarget.style.opacity = trashDefaultOpacity;
-
   draggedItem.remove();
 });
