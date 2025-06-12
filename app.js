@@ -1,81 +1,36 @@
 // TODO: add jsdocs to all functions
+// TODO: remove all magic values
 
 // Constants
 const dragContainer = document.getElementById("drag-container");
-const trashContainer = document.querySelector(".trash");
+const trashContainer = document.getElementById("trash");
 const trashDefaultOpacity = 0.5;
 const trashHoverOpacity = 0.8;
-
-// Drag container event listeners
-dragContainer.addEventListener("dragover", (e) => {
-  e.preventDefault();
-});
-
-dragContainer.addEventListener("drop", (e) => {
-  e.stopPropagation();
-  e.preventDefault();
-  const dropTarget = document.getElementById("drag-container");
-  console.log("droptarget ", dropTarget);
-  const draggedItem = document.querySelector('[data-temp-id="temporary_id"]');
-
-  updateNestingLevel(-1, draggedItem);
-  createNestingBars(draggedItem);
-  dropTarget.appendChild(draggedItem);
-});
-
-dragContainer.addEventListener("dragend", (e) => {
-  e.stopPropagation();
-  const draggedItem = document.querySelector('[data-temp-id="temporary_id"]');
-  draggedItem.removeAttribute("data-temp-id");
-});
-
-// Trash container event listeners
-trashContainer.addEventListener("dragover", (e) => {
-  e.preventDefault();
-  e.stopPropagation();
-  e.currentTarget.style.opacity = trashHoverOpacity;
-});
-
-trashContainer.addEventListener("dragleave", (e) => {
-  e.preventDefault();
-  e.stopPropagation();
-  e.currentTarget.style.opacity = trashDefaultOpacity;
-});
-
-trashContainer.addEventListener("drop", (e) => {
-  e.preventDefault();
-  e.stopPropagation();
-  e.currentTarget.style.opacity = trashDefaultOpacity;
-  const dropTarget = document.querySelector(".trash");
-  console.log("droptarget ", dropTarget);
-  const draggedItem = document.querySelector('[data-temp-id="temporary_id"]');
-  draggedItem.remove();
-});
+const depthBar = "│";
+const nestingBar = "├─";
 
 /**
- * Creates custom html element.
- * @param {string} type - The HTML element type.
+ * Creates custom HTML element.
+ * @param {string} elementType - The HTML element type (e.g., 'div', 'span', 'p').
  * @param {string} className - The element's class name.
- * @param {Object} [attributes={}] - An optional key-value of element
- * attributes.
+ * @param {Object} [attributes={}] - An optional key-value object of element attributes (e.g., `{ id: 'my-id', 'data-value': '123' }`).
+ * @returns {Element} The newly created HTML element.
  */
 function createCustomElement(elementType, className, attributes = {}) {
   const newElement = document.createElement(elementType);
+
   newElement.classList.add(className);
   Object.keys(attributes).forEach((key) => {
     newElement.setAttribute(key, attributes[key]);
   });
+
   return newElement;
 }
 
-// Nesting Logic Functions
+//  TODO: refactor nesting logic functions
 function updateNestingLevel(dropTargetNestingLevel, draggedItem) {
-  console.log("dropTargetNestingLevel:", dropTargetNestingLevel);
-  console.log("draggedItem:", draggedItem);
-
   const newNestingLevel =
     dropTargetNestingLevel >= 0 ? parseInt(dropTargetNestingLevel) + 1 : 0;
-  console.log("newNestingLevel:", newNestingLevel);
 
   draggedItem.dataset.nestingLevel = newNestingLevel;
 
@@ -83,10 +38,8 @@ function updateNestingLevel(dropTargetNestingLevel, draggedItem) {
     const children = Array.from(
       draggedItem.querySelector(".children").children,
     );
-    console.log("children:", children);
 
     children.forEach((child) => {
-      console.log("Updating child:", child);
       updateNestingLevel(newNestingLevel, child);
     });
   }
@@ -111,7 +64,7 @@ function createDepth(depth, draggedItem) {
   const nestingLevel = parseInt(draggedItem.dataset.nestingLevel);
   for (let i = 1; i < nestingLevel; i++) {
     const depthBars = document.createElement("div");
-    depthBars.innerHTML = "│";
+    depthBars.innerHTML = depthBar;
     depthBars.style.paddingRight = "16px";
     depthBars.style.paddingLeft = "2px";
     depth.appendChild(depthBars);
@@ -125,7 +78,8 @@ function createNestingBars(draggedItem) {
 
   createDepth(depth, draggedItem);
 
-  nested.innerHTML = parseInt(draggedItem.dataset.nestingLevel) > 0 ? "├─" : "";
+  nested.innerHTML =
+    parseInt(draggedItem.dataset.nestingLevel) > 0 ? nestingBar : "";
 
   nested.style.paddingRight = nested.innerHTML === "" ? "0px" : "6px";
   nested.style.paddingLeft = nested.innerHTML === "" ? "0px" : "2px";
@@ -310,17 +264,13 @@ function createContainer(type) {
   });
 }
 
-// Buttons event listeners
-function addButtonClickListener(id, type) {
+function addButtonListener(id, type) {
   document
     .getElementById(id)
     .addEventListener("click", () => createContainer(type));
 }
 
 function handleClear() {
-  const dragContainer = document.getElementById("drag-container");
-  const trashContainer = document.querySelector(".trash");
-
   Array.from(dragContainer.children).forEach((child) => {
     if (child !== trashContainer) {
       child.remove();
@@ -350,7 +300,6 @@ function createFileSystem(zip, parent, basePath = "") {
 }
 
 function handleForge() {
-  const zip = new JSZip();
   const dragContainer = document.getElementById("drag-container");
   const rootElement = dragContainer.querySelector(".folder");
 
@@ -358,6 +307,8 @@ function handleForge() {
     alert("Root folder is missing");
     return;
   }
+
+  const zip = new JSZip();
 
   const children = rootElement.querySelector(".children").children;
 
@@ -378,6 +329,11 @@ function handleForge() {
   });
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  addButtonListener("addFolder", "folder");
+  addButtonListener("addFile", "file");
+});
+
 document.addEventListener("click", (e) => {
   switch (e.target.id) {
     case "clear":
@@ -391,7 +347,51 @@ document.addEventListener("click", (e) => {
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  addButtonClickListener("addFolder", "folder");
-  addButtonClickListener("addFile", "file");
+// Drag container event listeners
+dragContainer.addEventListener("dragover", (e) => {
+  e.preventDefault();
+});
+
+dragContainer.addEventListener("drop", (e) => {
+  const draggedItem = document.querySelector('[data-temp-id="temporary_id"]');
+
+  e.stopPropagation();
+  e.preventDefault();
+  updateNestingLevel(-1, draggedItem);
+  createNestingBars(draggedItem);
+  dropTarget.appendChild(draggedItem);
+});
+
+dragContainer.addEventListener("dragend", (e) => {
+  const draggedItem = document.querySelector('[data-temp-id="temporary_id"]');
+
+  e.stopPropagation();
+
+  draggedItem.removeAttribute("data-temp-id");
+});
+
+// Trash container event listeners
+trashContainer.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+
+  e.currentTarget.style.opacity = trashHoverOpacity;
+});
+
+trashContainer.addEventListener("dragleave", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+
+  e.currentTarget.style.opacity = trashDefaultOpacity;
+});
+
+trashContainer.addEventListener("drop", (e) => {
+  const draggedItem = document.querySelector('[data-temp-id="temporary_id"]');
+
+  e.preventDefault();
+  e.stopPropagation();
+
+  e.currentTarget.style.opacity = trashDefaultOpacity;
+
+  draggedItem.remove();
 });
