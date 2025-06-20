@@ -534,7 +534,7 @@ DRAG_CONTAINER.addEventListener("drop", (e) => {
   e.preventDefault();
   updateNestLevel(-1, DRAG_ELEMENT);
   createNestBars(DRAG_ELEMENT);
-  dropTarget.appendChild(DRAG_ELEMENT);
+  e.currentTarget.appendChild(DRAG_ELEMENT);
 });
 
 DRAG_CONTAINER.addEventListener("dragend", (e) => {
