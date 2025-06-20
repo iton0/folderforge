@@ -259,33 +259,33 @@ function createContainer(type) {
   NESTING_BARS.appendChild(DEPTH);
   NESTING_BARS.appendChild(NESTED);
 
-  NAME_INPUT.addEventListener("focus", () => {
-    NAME_INPUT.style.fontWeight = "bold";
+  NAME_INPUT.addEventListener("focus", (e) => {
+    e.currentTarget.style.fontWeight = "bold";
   });
-  NAME_INPUT.addEventListener("input", () => {
+  NAME_INPUT.addEventListener("input", (e) => {
     NEW_CONTAINER.draggable = false;
-    NAME_INPUT.name = NAME_INPUT.value.trim();
-    NAME_INPUT.value = NAME_INPUT.value.replace(/\s+/g, " ");
+    e.currentTarget.name = e.currentTarget.value.trim();
+    e.currentTarget.value = e.currentTarget.value.replace(/\s+/g, " ");
   });
   NAME_INPUT.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === "Escape") {
       e.preventDefault();
-      NAME_INPUT.blur();
+      e.currentTarget.blur();
     }
   });
-  NAME_INPUT.addEventListener("blur", () => {
+  NAME_INPUT.addEventListener("blur", (e) => {
     NEW_CONTAINER.draggable = true;
-    NAME_INPUT.value = NAME_INPUT.value.trim();
-    NAME_INPUT.style.fontWeight = "normal";
+    e.currentTarget.value = e.currentTarget.value.trim();
+    e.currentTarget.style.fontWeight = "normal";
 
-    if (NAME_INPUT.name === "") {
-      NAME_INPUT.name = `new_${type}`;
-      NAME_INPUT.value = NAME_INPUT.name;
+    if (e.currentTarget.name === "") {
+      e.currentTarget.name = `new_${type}`;
+      e.currentTarget.value = e.currentTarget.name;
     }
 
-    NAME_INPUT.setSelectionRange(
-      NAME_INPUT.value.length,
-      NAME_INPUT.value.length,
+    e.currentTarget.setSelectionRange(
+      e.currentTarget.value.length,
+      e.currentTarget.value.length,
     );
 
     /**
@@ -294,9 +294,9 @@ function createContainer(type) {
     const SIBLINGS = Array.from(NEW_CONTAINER.parentElement.children).filter(
       (child) => {
         return (
-          child !== NAME_INPUT.parentElement.parentElement &&
+          child !== e.currentTarget.parentElement.parentElement &&
           child.querySelector("input") &&
-          child.querySelector("input") !== NAME_INPUT
+          child.querySelector("input") !== e.currentTarget
         );
       },
     );
@@ -308,7 +308,7 @@ function createContainer(type) {
       /**
        * @const {string}
        */
-      const CURRENT_NAME = NAME_INPUT.value;
+      const CURRENT_NAME = e.currentTarget.value;
       /**
        * @const {HTMLInputElement}
        */
@@ -322,8 +322,8 @@ function createContainer(type) {
     // If sibling with same name exists returns to default name
     if (DUPLICATE_SIBLING) {
       alert(`A ${type} with the same name already exists`);
-      NAME_INPUT.name = `new_${type}`;
-      NAME_INPUT.value = NAME_INPUT.name;
+      e.currentTarget.name = `new_${type}`;
+      e.currentTarget.value = e.currentTarget.name;
     }
   });
 
@@ -595,6 +595,6 @@ document.addEventListener("click", (e) => {
 });
 
 // Page load event listener
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("year").innerHTML = new Date().getFullYear();
+document.addEventListener("DOMContentLoaded", (e) => {
+  e.currentTarget.getElementById("year").innerHTML = new Date().getFullYear();
 });
